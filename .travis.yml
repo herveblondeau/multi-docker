@@ -13,3 +13,12 @@ after_success:
   - docker build -t herveblondeau/multi-nginx ./nginx
   - docker build -t herveblondeau/multi-server ./server
   - docker build -t herveblondeau/multi-worker ./worker
+
+  # Log in to the Docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  # Take those images and push them to Docker Hub
+  - docker push herveblondeau/multi-client
+  - docker push herveblondeau/multi-nginx
+  - docker push herveblondeau/multi-server
+  - docker push herveblondeau/multi-worker
